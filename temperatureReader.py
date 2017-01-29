@@ -37,13 +37,16 @@ def post_data(temp):
     return response
 
 while True:
-    t = str(read_temp())
-    resp = post_data(t)
-    print(resp)
-    print(t)
-    f= open('temp.csv','a')
-    f.write(time.strftime("%H:%M:%S") + ',' )
-    f.write(t)
-    f.write('\n')
-    f.close()
-    time.sleep(60)
+    try:
+        t = str(read_temp())
+        resp = post_data(t)
+        print(resp)
+        print(t)
+        f= open('temp.csv','a')
+        f.write(time.strftime("%H:%M:%S") + ',' )
+        f.write(t)
+        f.write('\n')
+        f.close()
+        time.sleep(60)
+    except Exception:
+        print "ERROR IN WHILE!"
