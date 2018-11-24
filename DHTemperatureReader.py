@@ -31,10 +31,10 @@ def post_data(temp):
         print "9:"
         print tm
         print hu
-        url = "https://api.thingspeak.com/update?api_key=LJ4VRHELTZKXIIXK&field1="+tm
+        url = "https://api.thingspeak.com/update?api_key=LJ4VRHELTZKXIIXK&field1="+str(tm)
         response = urllib.urlopen(url).read()
         print "10"
-        url = "https://api.thingspeak.com/update?api_key=LJ4VRHELTZKXIIXK&field2="+hu
+        url = "https://api.thingspeak.com/update?api_key=LJ4VRHELTZKXIIXK&field2="+str(hu)
         urllib.urlopen(url).read()
         print "11"
     except IOError:
