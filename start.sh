@@ -1,2 +1,2 @@
- nohup python temperature/src/main/python/DHTemperatureReader.py &
+ nohup python DHTemperatureReader.py &
 
