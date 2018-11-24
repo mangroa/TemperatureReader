@@ -26,7 +26,7 @@ def dhTemp():
 def post_data(temp):
     global tm
     global hu
-    print "8"
+    print "8a"
     try:
         print "9:" + tm + hu
         url = "https://api.thingspeak.com/update?api_key=LJ4VRHELTZKXIIXK&field1="+tm
