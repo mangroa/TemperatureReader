@@ -24,7 +24,7 @@ def post_data(temp):
     try:
         url = "https://api.thingspeak.com/update?api_key=LJ4VRHELTZKXIIXK&field1="+str(tm)
         print urllib.urlopen(url).read()
-        time.sleep(10)
+        time.sleep(30)
         url = "https://api.thingspeak.com/update?api_key=LJ4VRHELTZKXIIXK&field2="+str(hu)
         print urllib.urlopen(url).read()
     except IOError:
