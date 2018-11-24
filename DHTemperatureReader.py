@@ -24,6 +24,8 @@ def dhTemp():
     return temperature
 
 def post_data(temp):
+    global tm
+    global hu
     try:
         url = "https://api.thingspeak.com/update?api_key=LJ4VRHELTZKXIIXK&field1="+tm
         url = "https://api.thingspeak.com/update?api_key=LJ4VRHELTZKXIIXK&field2="+hu
@@ -34,7 +36,9 @@ def post_data(temp):
 
 while True:
     try:
+        print "6"
         t = str(dhTemp())
+        print "7"
         resp = post_data(t)
         print(resp)
         print(t)
