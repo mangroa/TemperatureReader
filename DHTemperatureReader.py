@@ -6,20 +6,20 @@ import urllib
 import sys
 import Adafruit_DHT
 
-t = 0
-h = 0
+tm = 0
+hu = 0
 
 def dhTemp():
     humidity, temperature = Adafruit_DHT.read_retry(11, 4)
     print 'Temp: {0:0.1f} C  Humidity: {1:0.1f} %'.format(temperature, humidity)
-    t = temperature
-    h = humidity
+    tm = temperature
+    hu = humidity
     return temperature
 
 def post_data(temp):
     try:
-        url = "https://api.thingspeak.com/update?api_key=LJ4VRHELTZKXIIXK&field1="+t
-        url = "https://api.thingspeak.com/update?api_key=LJ4VRHELTZKXIIXK&field2="+h
+        url = "https://api.thingspeak.com/update?api_key=LJ4VRHELTZKXIIXK&field1="+tm
+        url = "https://api.thingspeak.com/update?api_key=LJ4VRHELTZKXIIXK&field2="+hu
         response = urllib.urlopen(url).read()
     except IOError:
         print "ERROR WHILE POSTING DATA!"
