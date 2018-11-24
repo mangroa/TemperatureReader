@@ -23,12 +23,12 @@ def post_data(temp):
     global hu
     try:
         url = "https://api.thingspeak.com/update?api_key=LJ4VRHELTZKXIIXK&field1="+str(tm)
-        response = urllib.urlopen(url).read()
+        print urllib.urlopen(url).read()
         url = "https://api.thingspeak.com/update?api_key=LJ4VRHELTZKXIIXK&field2="+str(hu)
-        urllib.urlopen(url).read()
+        print urllib.urlopen(url).read()
     except IOError:
         print "ERROR WHILE POSTING DATA!"
-    return response
+    return "OK"
 
 while True:
     try:
