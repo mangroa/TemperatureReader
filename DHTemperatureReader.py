@@ -11,11 +11,16 @@ hu = 0
 
 def dhTemp():
     humidity, temperature = Adafruit_DHT.read_retry(11, 4)
+    print "1"
     print 'Temp: {0:0.1f} C  Humidity: {1:0.1f} %'.format(temperature, humidity)
     global tm 
+    print "2"
     tm = temperature
+    print "3"
     global hu
+    print "4"
     hu = humidity
+    print "5"
     return temperature
 
 def post_data(temp):
