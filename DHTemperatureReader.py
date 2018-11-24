@@ -26,10 +26,15 @@ def dhTemp():
 def post_data(temp):
     global tm
     global hu
+    print "8"
     try:
+        print "9"
         url = "https://api.thingspeak.com/update?api_key=LJ4VRHELTZKXIIXK&field1="+tm
-        url = "https://api.thingspeak.com/update?api_key=LJ4VRHELTZKXIIXK&field2="+hu
         response = urllib.urlopen(url).read()
+        print "10"
+        url = "https://api.thingspeak.com/update?api_key=LJ4VRHELTZKXIIXK&field2="+hu
+        urllib.urlopen(url).read()
+        print "11"
     except IOError:
         print "ERROR WHILE POSTING DATA!"
     return response
@@ -40,6 +45,7 @@ while True:
         t = str(dhTemp())
         print "7"
         resp = post_data(t)
+        print "8"
         print(resp)
         print(t)
         f= open('temp.csv','a')
