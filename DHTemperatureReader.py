@@ -28,7 +28,9 @@ def post_data(temp):
     global hu
     print "8a"
     try:
-        print "9:" + tm + hu
+        print "9:"
+        print tm
+        print hu
         url = "https://api.thingspeak.com/update?api_key=LJ4VRHELTZKXIIXK&field1="+tm
         response = urllib.urlopen(url).read()
         print "10"
