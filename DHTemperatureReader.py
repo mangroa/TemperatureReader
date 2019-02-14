@@ -29,6 +29,8 @@ def post_data(temp):
         print("POST Response" + r.status_code, r.reason)
     except IOError:
         print "ERROR WHILE POSTING DATA!"
+    except Exception as e:
+        print e.message
     return "OK"
 
 while True:
