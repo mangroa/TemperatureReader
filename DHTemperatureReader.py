@@ -25,6 +25,7 @@ def post_data(temp):
         url = "https://api.thingspeak.com/update?api_key=LJ4VRHELTZKXIIXK&field2="+str(hu)
         print urllib.urlopen(url).read()
         requestmsg = "{'name' : 'bedroom','temperatureReading' : 10.3,'timestamp' : }"
+        print ("About to post " + requestmsg)
         r = requests.post("http://bugs.python.org", data=requestmsg)
         print("POST Response" + r.status_code, r.reason)
     except IOError:
