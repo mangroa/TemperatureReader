@@ -2,6 +2,7 @@ import Adafruit_DHT
 import time
 import urllib
 import requests
+import datetime
 
 tm = 0
 hu = 0
@@ -19,7 +20,7 @@ def post_data(temp):
     global tm
     global hu
     try:
-        requestmsg = "{'name' : 'bedroom','temperatureReading' : 10.3,'timestamp' : " + str(int(time.time())) + "}"
+        requestmsg = "{'name' : 'bedroom','temperatureReading' : 10.3,'timestamp' : " + str(int(time.time())*1000) + "}"
         headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
         print ("About to post " + requestmsg)
         r = requests.post("http://3.104.77.177:8080/temperatureReading/temperatures", data=requestmsg, headers=headers)
