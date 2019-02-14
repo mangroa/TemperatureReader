@@ -38,8 +38,8 @@ while True:
     try:
         t = str(dhTemp())
         resp = post_data(t)
-        print(resp)
-        print(t)
+        print("post_data response :" + resp)
+        print("Temperature posted :" + t)
         f= open('temp.csv','a')
         f.write(time.strftime("%H:%M:%S") + ',' )
         f.write(t)
