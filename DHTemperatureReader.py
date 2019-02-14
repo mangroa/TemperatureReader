@@ -26,7 +26,7 @@ def post_data(temp):
         print urllib.urlopen(url).read()
         requestmsg = "{'name' : 'bedroom','temperatureReading' : 10.3,'timestamp' : }"
         r = requests.post("http://bugs.python.org", data=requestmsg)
-        print(r.status_code, r.reason)
+        print("POST Response" + r.status_code, r.reason)
     except IOError:
         print "ERROR WHILE POSTING DATA!"
     return "OK"
