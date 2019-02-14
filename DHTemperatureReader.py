@@ -1,10 +1,7 @@
-import os
-
+import Adafruit_DHT
 import time
 import urllib
-
-import sys
-import Adafruit_DHT
+import requests
 
 tm = 0
 hu = 0
@@ -27,6 +24,9 @@ def post_data(temp):
         time.sleep(30)
         url = "https://api.thingspeak.com/update?api_key=LJ4VRHELTZKXIIXK&field2="+str(hu)
         print urllib.urlopen(url).read()
+        requestmsg = "{'name' : 'bedroom','temperatureReading' : 10.3,'timestamp' : }"
+        r = requests.post("http://bugs.python.org", data=requestmsg)
+        print(r.status_code, r.reason)
     except IOError:
         print "ERROR WHILE POSTING DATA!"
     return "OK"
