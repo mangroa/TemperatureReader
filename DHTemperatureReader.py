@@ -24,7 +24,7 @@ def post_data(temp):
         headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
         print ("About to post " + requestmsg)
         #r = requests.post("http://54.252.155.149:8080/temperatureReading/temperatures", data=requestmsg, headers=headers)
-        print("POST Response" + str(r.status_code), r.reason)
+        #print("POST Response" + str(r.status_code), r.reason)
         url = "https://api.thingspeak.com/update?api_key=LJ4VRHELTZKXIIXK&field1="+str(tm)
         print urllib.urlopen(url).read()
         time.sleep(30)
