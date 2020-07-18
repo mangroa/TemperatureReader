@@ -44,7 +44,7 @@ while True:
         resp = post_data(t)
         print("post_data response :" + resp)
         print("Temperature posted :" + t)
-        f= open('temp.csv','a')
+        f= open('output.csv','a')
         f.write(time.strftime("%H:%M:%S") + ',' )
         f.write(t)
         f.write('\n')
