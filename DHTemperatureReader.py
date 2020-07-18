@@ -27,9 +27,10 @@ def post_data(temp):
         #print("POST Response" + str(r.status_code), r.reason)
         url = "https://api.thingspeak.com/update?api_key=LJ4VRHELTZKXIIXK&field1="+str(tm)
         print urllib.urlopen(url).read()
-        time.sleep(30)
+        time.sleep(60)
         url = "https://api.thingspeak.com/update?api_key=LJ4VRHELTZKXIIXK&field2="+str(hu)
         print urllib.urlopen(url).read()
+        time.sleep(60)
 
 
     except IOError:
@@ -49,6 +50,5 @@ while True:
         f.write(t)
         f.write('\n')
         f.close()
-        time.sleep(60)
     except Exception:
         print "ERROR IN WHILE!"
