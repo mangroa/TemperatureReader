@@ -42,7 +42,7 @@ while True:
         resp = post_data(t)
         print(resp)
         print(t)
-        f= open('temp.csv','a')
+        f= open('output.csv','a')
         f.write(time.strftime("%H:%M:%S") + ',' )
         f.write(t)
         f.write('\n')
