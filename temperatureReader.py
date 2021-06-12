@@ -2,6 +2,7 @@ import os
 
 import time
 import http.client
+import requests
 from datetime import datetime
 
 from influxdb_client import InfluxDBClient, Point, WritePrecision
