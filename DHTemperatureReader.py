@@ -68,5 +68,7 @@ while True:
         f.write(t)
         f.write('\n')
         f.close()
+        time.sleep(60)
+        sys.stdout.flush()
     except Exception:
         print ("ERROR IN WHILE!")
