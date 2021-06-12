@@ -59,6 +59,7 @@ def post_data(temp):
         print ("ERROR WHILE POSTING DATA!")
     except Exception:
         print (" 2 ERROR WHILE POSTING DATA!")
+        traceback.print_tb(exc_traceback, limit=1, file=sys.stdout)
         return "OK"
 
 while True:
