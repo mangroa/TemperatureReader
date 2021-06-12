@@ -18,7 +18,7 @@ def dhTemp():
     global tm 
     tm = '{0:0.1f}'.format(temperature)
     global hu
-    hu = humidity
+    hu = '{0:0.1f}'.format(humidity)
     return temperature
 
 def post_data(temp):
