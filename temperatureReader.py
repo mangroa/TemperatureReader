@@ -1,7 +1,7 @@
 import os
 
 import time
-import urllib
+import http.client
 
 os.system('modprobe w1-gpio')
 
@@ -30,17 +30,20 @@ def read_temp():
 
 def post_data(temp):
     try:
-        url = "https://api.thingspeak.com/update?api_key=LJ4VRHELTZKXIIXK&field1="+temp
-        response = urllib.urlopen(url).read()
+        url = "https://api.thingspeak.com/update?api_key=LJ4VRHELTZKXIIXK&field3="+temp
+        print("GET URL : " + url);
+        conn = http.client.HTTPSConnection("api.thingspeak.com")
+        conn.request("GET", url)
+        r1 = conn.getresponse()
+        print(r1.status, r1.reason)
     except IOError:
         print ("ERROR WHILE POSTING DATA!")
-    return response
+    return r1
 
 while True:
     try:
         t = str(read_temp())
         resp = post_data(t)
-        print(resp)
         print(t)
         f= open('output.csv','a')
         f.write(time.strftime("%H:%M:%S") + ',' )
@@ -50,3 +53,4 @@ while True:
         time.sleep(60)
     except Exception:
         print ("ERROR IN WHILE!")
+        traceback.print_tb(exc_traceback, limit=1, file=sys.stdout)
