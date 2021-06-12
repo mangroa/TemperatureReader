@@ -58,9 +58,6 @@ def post_data(temp):
         time.sleep(60)
         print("End wait2")
 
-
-    except IOError:
-        print ("ERROR WHILE POSTING DATA!")
     except Exception:
         print (" 2 ERROR WHILE POSTING DATA!")
         traceback.print_tb(exc_traceback, limit=1, file=sys.stdout)
