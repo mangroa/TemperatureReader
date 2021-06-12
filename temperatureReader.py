@@ -52,6 +52,7 @@ def post_data(temp):
         write_api.write(bucket, org, data)
 
     except IOError:
+
         print ("ERROR WHILE POSTING DATA!")
     return r1
 
@@ -68,4 +69,3 @@ while True:
         time.sleep(60)
     except Exception:
         print ("ERROR IN WHILE!")
-        traceback.print_tb(exc_traceback, limit=1, file=sys.stdout)
