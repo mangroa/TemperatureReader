@@ -2,6 +2,10 @@ import os
 
 import time
 import http.client
+from datetime import datetime
+
+from influxdb_client import InfluxDBClient, Point, WritePrecision
+from influxdb_client.client.write_api import SYNCHRONOUS
 
 os.system('modprobe w1-gpio')
 
@@ -9,6 +13,12 @@ os.system('modprobe w1-therm')
 
 
 temp_sensor ='/sys/bus/w1/devices/28-0000066ee2e3/w1_slave'
+
+token = "wt3xcNU-JXTRgFZpBVA5CEI78M4uOO-5PViTN-P6T3rXCog-UZpS8Ts5lw3shULA4gQeprnlREfCwQ71j2Y1XA=="
+org = "alan.mangroo@gmail.com"
+bucket = "Temperatures"
+
+client = InfluxDBClient(url="https://us-west-2-1.aws.cloud2.influxdata.com", token=token)
 
 def temp_raw():
     f = open(temp_sensor, 'r')
@@ -36,6 +46,11 @@ def post_data(temp):
         conn.request("GET", url)
         r1 = conn.getresponse()
         print(r1.status, r1.reason)
+
+        write_api = client.write_api(write_options=SYNCHRONOUS)
+        data = "temperature,location=garden value="+temp
+        write_api.write(bucket, org, data)
+
     except IOError:
         print ("ERROR WHILE POSTING DATA!")
     return r1
