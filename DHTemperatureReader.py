@@ -52,8 +52,8 @@ def post_data(temp):
 
     except IOError:
         print ("ERROR WHILE POSTING DATA!")
-    except Exception as e:
-        print (e.message)
+    except Exception:
+        traceback.print_tb(exc_traceback, limit=1, file=sys.stdout)
     return "OK"
 
 while True:
