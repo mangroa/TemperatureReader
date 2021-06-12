@@ -10,10 +10,7 @@ from influxdb_client.client.write_api import SYNCHRONOUS
 
 tm = 0
 hu = 0
-token = "wt3xcNU-JXTRgFZpBVA5CEI78M4uOO-5PViTN-P6T3rXCog-UZpS8Ts5lw3shULA4gQeprnlREfCwQ71j2Y1XA=="
-org = "alan.mangroo@gmail.com"
-bucket = "Temperatures"
-client = InfluxDBClient(url="https://us-west-2-1.aws.cloud2.influxdata.com", token=token)
+
 
 def dhTemp():
     humidity, temperature = Adafruit_DHT.read_retry(22, 4)
@@ -28,6 +25,10 @@ def post_data(temp):
     global tm
     global hu
     try:
+        token = "wt3xcNU-JXTRgFZpBVA5CEI78M4uOO-5PViTN-P6T3rXCog-UZpS8Ts5lw3shULA4gQeprnlREfCwQ71j2Y1XA=="
+        org = "alan.mangroo@gmail.com"
+        bucket = "Temperatures"
+        client = InfluxDBClient(url="https://us-west-2-1.aws.cloud2.influxdata.com", token=token)
         print ("About to post temperature")
         url = "https://api.thingspeak.com/update?api_key=LJ4VRHELTZKXIIXK&field1="+str(tm)
         conn = http.client.HTTPSConnection("api.thingspeak.com")
