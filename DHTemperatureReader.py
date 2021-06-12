@@ -40,7 +40,7 @@ def post_data(temp):
         print("1")
         data = "temperature,location=bedroom1 value="+str(tm)
         print("1" + data)
-        write_api.write(bucket, org, data)
+       # write_api.write(bucket, org, data)
         print("1")
         print("Start wait")
         time.sleep(60)
