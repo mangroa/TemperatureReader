@@ -54,7 +54,8 @@ def post_data(temp):
     except IOError:
         print ("ERROR WHILE POSTING DATA!")
     except Exception:
-    return "OK"
+        print (" 2 ERROR WHILE POSTING DATA!")
+        return "OK"
 
 while True:
     try:
