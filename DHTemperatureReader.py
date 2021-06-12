@@ -1,6 +1,6 @@
 import Adafruit_DHT
 import time
-import urllib
+import http.client
 import requests
 import datetime
 
@@ -20,27 +20,26 @@ def post_data(temp):
     global tm
     global hu
     try:
-        requestmsg = "{'name' : 'bedroom','temperatureReading' : " + str(round(tm,2)) +",'timestamp' : " + str(int(time.time())*1000) + "}"
-        headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
-#         print ("About to post " + requestmsg)
-        #r = requests.post("http://54.252.155.149:8080/temperatureReading/temperatures", data=requestmsg, headers=headers)
-        #print("POST Response" + str(r.status_code), r.reason)
         print ("About to post temperature")
         url = "https://api.thingspeak.com/update?api_key=LJ4VRHELTZKXIIXK&field1="+str(tm)
-        print urllib.urlopen(url).read()
-        print ("Posted Temperature")
+        conn = http.client.HTTPSConnection("api.thingspeak.com")
+        conn.request("GET", url)
+        r1 = conn.getresponse()
+        print(r1.status, r1.reason)
         time.sleep(60)
         print ("About to post humidity")
         url = "https://api.thingspeak.com/update?api_key=LJ4VRHELTZKXIIXK&field2="+str(hu)
-        print urllib.urlopen(url).read()
-        print ("Posted Humidity")
+        conn = http.client.HTTPSConnection("api.thingspeak.com")
+        conn.request("GET", url)
+        r1 = conn.getresponse()
+        print(r1.status, r1.reason)
         time.sleep(60)
 
 
     except IOError:
-        print "ERROR WHILE POSTING DATA!"
+        print ("ERROR WHILE POSTING DATA!")
     except Exception as e:
-        print e.message
+        print (e.message)
     return "OK"
 
 while True:
@@ -55,4 +54,5 @@ while True:
         f.write('\n')
         f.close()
     except Exception:
-        print "ERROR IN WHILE!"
+        print ("ERROR IN WHILE!")
+        traceback.print_tb(exc_traceback, limit=1, file=sys.stdout)
