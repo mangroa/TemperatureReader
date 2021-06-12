@@ -1,3 +1,4 @@
+import os
 import Adafruit_DHT
 import time
 import http.client
@@ -53,7 +54,6 @@ def post_data(temp):
     except IOError:
         print ("ERROR WHILE POSTING DATA!")
     except Exception:
-        traceback.print_tb(exc_traceback, limit=1, file=sys.stdout)
     return "OK"
 
 while True:
@@ -69,4 +69,3 @@ while True:
         f.close()
     except Exception:
         print ("ERROR IN WHILE!")
-        traceback.print_tb(exc_traceback, limit=1, file=sys.stdout)
