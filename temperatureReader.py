@@ -2,7 +2,6 @@ import os
 
 import time
 import http.client
-import requests
 from datetime import datetime
 
 from influxdb_client import InfluxDBClient, Point, WritePrecision
@@ -46,6 +45,7 @@ def post_data(temp):
         conn = http.client.HTTPSConnection("api.thingspeak.com")
         conn.request("GET", url)
         r1 = conn.getresponse()
+        conn.close()
         print(r1.status, r1.reason)
 
         write_api = client.write_api(write_options=SYNCHRONOUS)
@@ -53,7 +53,6 @@ def post_data(temp):
         write_api.write(bucket, org, data)
 
     except IOError:
-
         print ("ERROR WHILE POSTING DATA!")
     return r1
 
@@ -70,3 +69,4 @@ while True:
         time.sleep(60)
     except Exception:
         print ("ERROR IN WHILE!")
+        traceback.print_tb(exc_traceback, limit=1, file=sys.stdout)
