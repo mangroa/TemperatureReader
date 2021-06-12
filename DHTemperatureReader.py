@@ -4,8 +4,15 @@ import http.client
 import requests
 import datetime
 
+from influxdb_client import InfluxDBClient, Point, WritePrecision
+from influxdb_client.client.write_api import SYNCHRONOUS
+
 tm = 0
 hu = 0
+token = "wt3xcNU-JXTRgFZpBVA5CEI78M4uOO-5PViTN-P6T3rXCog-UZpS8Ts5lw3shULA4gQeprnlREfCwQ71j2Y1XA=="
+org = "alan.mangroo@gmail.com"
+bucket = "Temperatures"
+client = InfluxDBClient(url="https://us-west-2-1.aws.cloud2.influxdata.com", token=token)
 
 def dhTemp():
     humidity, temperature = Adafruit_DHT.read_retry(22, 4)
@@ -26,13 +33,20 @@ def post_data(temp):
         conn.request("GET", url)
         r1 = conn.getresponse()
         print(r1.status, r1.reason)
+        write_api = client.write_api(write_options=SYNCHRONOUS)
+        data = "temperature,location=bedroom1 value="+tm
+        write_api.write(bucket, org, data)
         time.sleep(60)
+
         print ("About to post humidity")
         url = "https://api.thingspeak.com/update?api_key=LJ4VRHELTZKXIIXK&field2="+str(hu)
         conn = http.client.HTTPSConnection("api.thingspeak.com")
         conn.request("GET", url)
         r1 = conn.getresponse()
         print(r1.status, r1.reason)
+        write_api = client.write_api(write_options=SYNCHRONOUS)
+        data = "humidity,location=bedroom1 value="+hu
+        write_api.write(bucket, org, data)
         time.sleep(60)
 
 
