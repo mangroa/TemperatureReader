@@ -54,7 +54,7 @@ def post_data(temp):
         print(r1.status, r1.reason)
         write_api = client.write_api(write_options=SYNCHRONOUS)
         data = "humidity,location=bedroom1 value="+str(hu)
-        write_api.write(bucket, org, data)
+        #write_api.write(bucket, org, data)
         print("Start wait2")
         time.sleep(60)
         print("End wait2")
