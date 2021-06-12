@@ -12,5 +12,5 @@ client = InfluxDBClient(url="https://us-west-2-1.aws.cloud2.influxdata.com", tok
 
 write_api = client.write_api(write_options=SYNCHRONOUS)
 
-data = "mem,host=host1 used_percent=23.43234543"
+data = "temperature,location=garden value=21.0"
 write_api.write(bucket, org, data)
