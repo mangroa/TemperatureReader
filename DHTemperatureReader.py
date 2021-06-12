@@ -34,7 +34,7 @@ def post_data(temp):
         r1 = conn.getresponse()
         print(r1.status, r1.reason)
         write_api = client.write_api(write_options=SYNCHRONOUS)
-        data = "temperature,location=bedroom1 value="+tm
+        data = "temperature,location=bedroom1 value="+str(tm)
         write_api.write(bucket, org, data)
         time.sleep(60)
 
@@ -45,7 +45,7 @@ def post_data(temp):
         r1 = conn.getresponse()
         print(r1.status, r1.reason)
         write_api = client.write_api(write_options=SYNCHRONOUS)
-        data = "humidity,location=bedroom1 value="+hu
+        data = "humidity,location=bedroom1 value="+str(hu)
         write_api.write(bucket, org, data)
         time.sleep(60)
 
