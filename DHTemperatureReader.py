@@ -37,7 +37,9 @@ def post_data(temp):
         write_api = client.write_api(write_options=SYNCHRONOUS)
         data = "temperature,location=bedroom1 value="+str(tm)
         write_api.write(bucket, org, data)
+        print("Start wait")
         time.sleep(60)
+        print("End wait")
 
         print ("About to post humidity")
         url = "https://api.thingspeak.com/update?api_key=LJ4VRHELTZKXIIXK&field2="+str(hu)
@@ -48,7 +50,9 @@ def post_data(temp):
         write_api = client.write_api(write_options=SYNCHRONOUS)
         data = "humidity,location=bedroom1 value="+str(hu)
         write_api.write(bucket, org, data)
+        print("Start wait2")
         time.sleep(60)
+        print("End wait2")
 
 
     except IOError:
@@ -68,7 +72,9 @@ while True:
         f.write(t)
         f.write('\n')
         f.close()
+        print("Start wait3")
         time.sleep(60)
+        print("End wait3")
         sys.stdout.flush()
     except Exception:
         print ("ERROR IN WHILE!")
