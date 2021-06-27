@@ -41,7 +41,7 @@ def post_data(temp):
         write_api = client.write_api(write_options=SYNCHRONOUS)
         print("Start test write1")
         point = Point("sensors").tag("location", "bedroom").field("temperature", 23.43234543).time(datetime.utcnow(), WritePrecision.NS)
-        write_api.write(bucket, org, point)
+        client.write_points(bucket, org, point)
         print("End test write")
 
         print("1")
