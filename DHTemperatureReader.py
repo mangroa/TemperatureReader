@@ -40,8 +40,12 @@ def post_data(temp):
         print("Start test write")
         write_api = client.write_api(write_options=SYNCHRONOUS)
         print("Start test write1")
-        data = "mem,host=host1 used_percent=23.43234543"
-        write_api.write(bucket, org, data)
+        point = Point("mem") \
+            .tag("host", "host1") \
+            .field("used_percent", 23.43234543) \
+            .time(datetime.utcnow(), WritePrecision.NS)
+
+        write_api.write(bucket, org, point)
         print("End test write")
 
         print("1")
