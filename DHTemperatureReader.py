@@ -25,9 +25,9 @@ def post_data(temp):
     global tm
     global hu
     try:
-        token = "wt3xcNU-JXTRgFZpBVA5CEI78M4uOO-5PViTN-P6T3rXCog-UZpS8Ts5lw3shULA4gQeprnlREfCwQ71j2Y1XA=="
+        token = "b5PdBRMzo5xHI_RNwcZs5ymcnUt9y-jPViBlgM9_Yeaxk25wZ4stE66AAY8rQChObyac3RTsJSohEOU-OU_8xw=="
         org = "alan.mangroo@gmail.com"
-        bucket = "Temperatures"
+        bucket = "home"
         client = InfluxDBClient(url="https://us-west-2-1.aws.cloud2.influxdata.com", token=token)
         print ("About to post temperature")
         url = "https://api.thingspeak.com/update?api_key=LJ4VRHELTZKXIIXK&field1="+str(tm)
@@ -39,9 +39,9 @@ def post_data(temp):
         print("1")
         write_api = client.write_api(write_options=SYNCHRONOUS)
         print("1")
-        data = "temperature,location=bedroom1 value="+str(tm)
+        data = "sensors,location=bedroom1 value="+str(tm)
         print("1" + data)
-       # write_api.write(bucket, org, data)
+        write_api.write(bucket, org, data)
         print("1")
         print("Start wait")
         time.sleep(60)
