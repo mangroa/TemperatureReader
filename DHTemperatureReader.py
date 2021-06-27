@@ -4,6 +4,7 @@ import time
 import http.client
 import requests
 import datetime
+import traceback
 
 from influxdb_client import InfluxDBClient, Point, WritePrecision
 from influxdb_client.client.write_api import SYNCHRONOUS
@@ -15,7 +16,7 @@ hu = 0
 def dhTemp():
     humidity, temperature = Adafruit_DHT.read_retry(22, 4)
     print ('Temp: {0:0.1f} C  Humidity: {1:0.1f} %'.format(temperature, humidity))
-    global tm 
+    global tm
     tm = '{0:0.1f}'.format(temperature)
     global hu
     hu = '{0:0.1f}'.format(humidity)
@@ -28,7 +29,8 @@ def post_data(temp):
         token = "b5PdBRMzo5xHI_RNwcZs5ymcnUt9y-jPViBlgM9_Yeaxk25wZ4stE66AAY8rQChObyac3RTsJSohEOU-OU_8xw=="
         org = "alan.mangroo@gmail.com"
         bucket = "home"
-        client = InfluxDBClient(url="https://us-west-2-1.aws.cloud2.influxdata.com", token=token)
+        client = InfluxDBClient(url="https://us-west-2-1.aws.cloud2.influxdata.com", token=token,ssl=True, verify_ssl=False)
+
         print ("About to post temperature")
         url = "https://api.thingspeak.com/update?api_key=LJ4VRHELTZKXIIXK&field1="+str(tm)
         conn = http.client.HTTPSConnection("api.thingspeak.com")
@@ -37,12 +39,12 @@ def post_data(temp):
         print(r1.status, r1.reason)
         conn.close()
 
-        print("Start test write")
-        write_api = client.write_api(write_options=SYNCHRONOUS)
-        print("Start test write1")
-        point = Point("sensors").tag("location", "bedroom").field("temperature", 23.43234543).time(datetime.utcnow(), WritePrecision.NS)
-        client.write_points(bucket, org, point)
-        print("End test write")
+        #print("Start test write")
+        #write_api = client.write_api(write_options=SYNCHRONOUS)
+        #print("Start test write1")
+        #data = "sensors,location=bedroom1 temperature="+str(tm)
+        #write_api.write(bucket, org, data)
+        #print("End test write")
 
         print("1")
         write_api = client.write_api(write_options=SYNCHRONOUS)
@@ -63,14 +65,15 @@ def post_data(temp):
         r1 = conn.getresponse()
         print(r1.status, r1.reason)
         conn.close()
-        #write_api = client.write_api(write_options=SYNCHRONOUS)
-        data = "sensors,location=bedroom1 value="+str(hu)
-        #write_api.write(bucket, org, data)
+        write_api = client.write_api(write_options=SYNCHRONOUS)
+        data = "sensors,location=bedroom1 humidity="+str(hu)
+        write_api.write(bucket, org, data)
         print("Start wait2")
         time.sleep(60)
         print("End wait2")
     except Exception:
-        traceback.print_tb(exc_traceback, limit=1, file=sys.stdout)
+        traceback.print_exc()
+        print("Exception!")
         return "OK"
 
 while True:

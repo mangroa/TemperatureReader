@@ -14,11 +14,11 @@ os.system('modprobe w1-therm')
 
 temp_sensor ='/sys/bus/w1/devices/28-0000066ee2e3/w1_slave'
 
-token = "wt3xcNU-JXTRgFZpBVA5CEI78M4uOO-5PViTN-P6T3rXCog-UZpS8Ts5lw3shULA4gQeprnlREfCwQ71j2Y1XA=="
+token = "b5PdBRMzo5xHI_RNwcZs5ymcnUt9y-jPViBlgM9_Yeaxk25wZ4stE66AAY8rQChObyac3RTsJSohEOU-OU_8xw=="
 org = "alan.mangroo@gmail.com"
-bucket = "Temperatures"
+bucket = "home"
 
-client = InfluxDBClient(url="https://us-west-2-1.aws.cloud2.influxdata.com", token=token)
+client = InfluxDBClient(url="https://us-west-2-1.aws.cloud2.influxdata.com", token=token, ssl=True, verify_ssl=False)
 
 def temp_raw():
     f = open(temp_sensor, 'r')
@@ -45,11 +45,10 @@ def post_data(temp):
         conn = http.client.HTTPSConnection("api.thingspeak.com")
         conn.request("GET", url)
         r1 = conn.getresponse()
-        conn.close()
         print(r1.status, r1.reason)
 
         write_api = client.write_api(write_options=SYNCHRONOUS)
-        data = "temperature,location=garden value="+temp
+        data = "sensors,location=garden temperature="+temp
         write_api.write(bucket, org, data)
 
     except IOError:
