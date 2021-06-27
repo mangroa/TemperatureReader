@@ -37,10 +37,17 @@ def post_data(temp):
         print(r1.status, r1.reason)
         conn.close()
 
+        print("Start test write")
+        write_api = client.write_api(write_options=SYNCHRONOUS)
+        data = "mem,host=host1 used_percent=23.43234543"
+        write_api.write(bucket, org, data)
+        print("End test write")
+
         print("1")
         write_api = client.write_api(write_options=SYNCHRONOUS)
         print("2")
-        data = "sensors,location=bedroom1 value="+str(tm)
+        data = "sensors,location=bedroom1 temperature="+str(tm)
+
         print("3" + data)
         write_api.write(bucket, org, data)
         print("4")
